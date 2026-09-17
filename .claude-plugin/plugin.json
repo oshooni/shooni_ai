@@ -1,0 +1,8 @@
+{
+  "name": "noshooni-content",
+  "description": "노슈니(오수인)의 콘텐츠 제작 스킬 모음. 스레드 코어 잡기, 소재 발굴, 스레드 글쓰기, SEO 블로그 글쓰기.",
+  "version": "1.0.0",
+  "author": { "name": "노슈니(오수인)", "url": "https://github.com/oshooni" },
+  "homepage": "https://github.com/oshooni/shooni_ai",
+  "license": "CC-BY-4.0"
+}
