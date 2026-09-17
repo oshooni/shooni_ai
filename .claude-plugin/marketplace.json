@@ -1,0 +1,15 @@
+{
+  "name": "shooni-ai",
+  "owner": {
+    "name": "노슈니(오수인)",
+    "url": "https://github.com/oshooni"
+  },
+  "description": "노슈니(오수인)의 콘텐츠 제작 스킬 마켓플레이스. 스레드와 블로그 글쓰기 스킬을 제공합니다.",
+  "plugins": [
+    {
+      "name": "noshooni-content",
+      "source": "./",
+      "description": "스레드 글쓰기 3종과 SEO 블로그 글쓰기 스킬 모음"
+    }
+  ]
+}
