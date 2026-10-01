@@ -1,6 +1,6 @@
 # shooni_ai
 
-노슈니(오수인)가 실제로 쓰는 콘텐츠 제작 스킬 모음입니다. 스레드 글쓰기 3종과 SEO 블로그 글쓰기 1종.
+노슈니(오수인)가 실제로 쓰는 스킬 모음입니다. 비즈니스 코어 잡기 1종, 스레드 글쓰기 3종, SEO 블로그 글쓰기 1종.
 
 스킬은 "이럴 땐 이렇게 해라"를 적어둔 문서입니다. Claude가 해당 작업을 할 때 이 문서를 읽고 그 방식대로 일합니다. 프롬프트를 매번 길게 쓰지 않아도 되고, 결과의 결이 일정해집니다.
 
@@ -8,12 +8,19 @@
 
 | 스킬 | 하는 일 | 언제 쓰나 |
 |---|---|---|
+| `noshooni-core` | 비즈니스의 코어(내가 가진 재료 + 내가 파는 것이 만드는 변화)를 한 번에 한 질문씩 인터뷰로 세우고, "우리는 ___를 파는 게 아니라 ___를 판다" 한 문장과 코어 한 장으로 정리합니다. 제품이 있든, 계획만 있든, 아무것도 없든 다 됩니다 | 뭘 팔아야 할지 모르겠을 때. 가치·페르소나·카피를 잡기 전 맨 처음 |
 | `threads-core` | 계정의 코어(목적·타겟·관점·컨셉·말투·전환)를 인터뷰로 잡아 `my-threads-core.md` 파일로 만듭니다 | 스레드를 시작할 때 맨 처음. 글이 잘 나오는데 내 글 같지 않을 때 |
 | `threads-material` | 소재를 파내고 쌓습니다. 내 서사 재고를 `my-story-bank.md`에 정리하고, 외부 사례를 붙여 후킹 소재로 만듭니다 | 쓸 게 떨어졌을 때, 오늘 뭘 쓸지 모르겠을 때 |
 | `threads-writing` | 스레드 글을 훅 구조로 설계해 칸 단위로 씁니다. 훅 후보 3개를 먼저 보여주고 고르면 전체를 완성합니다 | 실제로 글을 쓸 때 |
 | `blog-writing` | 검색 의도에 맞는 노션 SEO 블로그 글을 씁니다 | 블로그 장문을 쓸 때 |
 
-`threads-writing`은 참고 파일 세 개를 함께 씁니다.
+`noshooni-core`는 참고 파일 세 개를 함께 씁니다.
+
+- `references/interview-branch.md` — 유형별(제품 있음 / 계획 있음 / 아직 없음) 인터뷰 질문 세트
+- `references/examples.md` — 유형별 완성 예시 3종
+- `references/output-template.md` — 코어 한 장 출력 양식
+
+`threads-writing`도 참고 파일 세 개를 함께 씁니다.
 
 - `references/hooks.md` — 훅 유형 카탈로그와 실제 예시
 - `references/topic-mining.md` — 소재가 없을 때 아이디어를 뽑는 프레임
@@ -41,11 +48,17 @@ cp -r shooni_ai/skills/* ~/.claude/skills/
 
 특정 프로젝트에서만 쓰려면 `~/.claude/skills/` 대신 그 프로젝트의 `.claude/skills/`에 넣습니다.
 
-폴더 구조는 그대로 유지해야 합니다. 특히 `threads-writing`은 안에 있는 `references` 폴더까지 같이 옮겨야 정상 동작합니다.
+폴더 구조는 그대로 유지해야 합니다. 특히 `noshooni-core`와 `threads-writing`은 안에 있는 `references` 폴더까지 같이 옮겨야 정상 동작합니다.
 
 ```
 ~/.claude/skills/
 ├── blog-writing/SKILL.md
+├── noshooni-core/
+│   ├── SKILL.md
+│   └── references/
+│       ├── interview-branch.md
+│       ├── examples.md
+│       └── output-template.md
 ├── threads-core/SKILL.md
 ├── threads-material/SKILL.md
 └── threads-writing/
@@ -70,6 +83,10 @@ zip -r threads-writing.zip threads-writing
 스킬 기능을 쓰지 않아도 됩니다. `SKILL.md` 내용을 복사해 대화 맨 앞에 붙이고 "이 기준대로 써줘"라고 해도 거의 같은 결과가 나옵니다.
 
 ## 사용 예시
+
+```
+내가 뭘 파는 건지 모르겠어. 코어부터 잡아줘.
+```
 
 ```
 스레드 계정 코어부터 잡고 싶어. threads-core로 진행해줘.
