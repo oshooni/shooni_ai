@@ -4,12 +4,12 @@
     "name": "노슈니(오수인)",
     "url": "https://github.com/oshooni"
   },
-  "description": "노슈니(오수인)의 스킬 마켓플레이스. 비즈니스 코어 잡기, 스레드와 블로그 글쓰기 스킬을 제공합니다.",
+  "description": "노슈니(오수인)의 스킬 마켓플레이스. 비즈니스 코어 잡기, 가상 고객 검증, 스레드와 블로그 글쓰기 스킬을 제공합니다.",
   "plugins": [
     {
       "name": "noshooni-content",
       "source": "./",
-      "description": "비즈니스 코어 잡기 1종, 스레드 글쓰기 3종, SEO 블로그 글쓰기 스킬 모음"
+      "description": "비즈니스 코어 잡기 1종, 가상 고객 피드백·QA 1종, 스레드 글쓰기 3종, SEO 블로그 글쓰기 스킬 모음"
     }
   ]
 }

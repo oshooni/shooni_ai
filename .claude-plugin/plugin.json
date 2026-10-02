@@ -1,7 +1,7 @@
 {
   "name": "noshooni-content",
-  "description": "노슈니(오수인)의 스킬 모음. 비즈니스 코어 잡기, 스레드 코어 잡기, 소재 발굴, 스레드 글쓰기, SEO 블로그 글쓰기.",
-  "version": "1.1.0",
+  "description": "노슈니(오수인)의 스킬 모음. 비즈니스 코어 잡기, 가상 고객 피드백·QA, 스레드 코어 잡기, 소재 발굴, 스레드 글쓰기, SEO 블로그 글쓰기.",
+  "version": "1.2.0",
   "author": {
     "name": "노슈니(오수인)",
     "url": "https://github.com/oshooni"
