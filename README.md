@@ -1,6 +1,6 @@
 # shooni_ai
 
-노슈니(오수인)가 실제로 쓰는 스킬 모음입니다. 비즈니스 코어 잡기 1종, 가상 고객 검증 1종, 신청 자동 메일 1종, 스레드 글쓰기 3종, SEO 블로그 글쓰기 1종.
+노슈니(오수인)가 실제로 쓰는 스킬 모음입니다. 비즈니스 코어 잡기 1종, 가상 고객 검증 1종, 신청 자동 메일 1종, AI 뉴스 카드뉴스 1종, 스레드 글쓰기 3종, SEO 블로그 글쓰기 1종.
 
 스킬은 "이럴 땐 이렇게 해라"를 적어둔 문서입니다. Claude가 해당 작업을 할 때 이 문서를 읽고 그 방식대로 일합니다. 프롬프트를 매번 길게 쓰지 않아도 되고, 결과의 결이 일정해집니다.
 
@@ -11,6 +11,7 @@
 | `noshooni-core` | 비즈니스의 코어(내가 가진 재료 + 내가 파는 것이 만드는 변화)를 한 번에 한 질문씩 인터뷰로 세우고, "우리는 ___를 파는 게 아니라 ___를 판다" 한 문장과 코어 한 장으로 정리합니다. 제품이 있든, 계획만 있든, 아무것도 없든 다 됩니다 | 뭘 팔아야 할지 모르겠을 때. 가치·페르소나·카피를 잡기 전 맨 처음 |
 | `noshooni-customer-qa` | 한국 인구통계에 맞춘 합성 페르소나 3,000명 중에서 가상 고객 패널을 불러 상품·상세페이지·가격에 대한 반응을 듣고(인터뷰), 신청·결제 흐름에서 어디서 막히는지 직접 시켜봅니다(QA). 수락·조건부·거절을 같은 무게로 다루고, 모든 판정에 근거를 붙입니다 | 코어를 세운 직후, 상세페이지를 공개하기 전, 결제를 붙인 뒤 |
 | `noshooni-auto-mail` | 수퍼베이스 테이블에 신청이 들어오면 내 지메일에서 신청자 확인 메일과 나에게 가는 알림 메일이 자동으로 나가게 만듭니다. 구글 앱스 스크립트 하나로 도메인·서버 없이 0원. 메일 문장(페이지에 있는 사실만, 결제 전이면 "접수")부터 배포·웹훅 연결·시험까지 함께 진행합니다 | 신청·가입을 받기 시작했는데 확인 메일을 손으로 보내고 있을 때 |
+| `noshooni-card-news` | 최근 7일 AI 뉴스 중 하나를 골라 초보자용 인스타 카드뉴스(1080×1350) 6~7장을 Figma에 바로 그리고, 게시물 캡션까지 씁니다. 처음 쓸 때 활동명·대표색·마지막 장 문구를 물어 `my-brand.md`에 저장해 두고 다음부터 그대로 씁니다. API 키 없이 Claude의 Figma 연결만 있으면 되고, 무료 Figma 계정에서도 됩니다 | AI 소식을 인스타에 꾸준히 올리고 싶을 때 |
 | `threads-core` | 계정의 코어(목적·타겟·관점·컨셉·말투·전환)를 인터뷰로 잡아 `my-threads-core.md` 파일로 만듭니다 | 스레드를 시작할 때 맨 처음. 글이 잘 나오는데 내 글 같지 않을 때 |
 | `threads-material` | 소재를 파내고 쌓습니다. 내 서사 재고를 `my-story-bank.md`에 정리하고, 외부 사례를 붙여 후킹 소재로 만듭니다 | 쓸 게 떨어졌을 때, 오늘 뭘 쓸지 모르겠을 때 |
 | `threads-writing` | 스레드 글을 훅 구조로 설계해 칸 단위로 씁니다. 훅 후보 3개를 먼저 보여주고 고르면 전체를 완성합니다 | 실제로 글을 쓸 때 |
@@ -34,6 +35,11 @@
 - `references/install-guide.md` — 앱스 스크립트·수퍼베이스 설치 단계, 실제로 막혔던 함정, 막힐 때 보는 표
 - `assets/Code.gs` — 복사해서 채우는 앱스 스크립트 원본
 - `assets/supabase-trigger.sql` — 수퍼베이스 초인종 SQL
+
+`noshooni-card-news`는 그리기 코드를 함께 씁니다.
+
+- `scripts/build.js` — Figma에 카드를 그리는 코드. 스킬이 대표색과 카드 문구만 바꿔 넣어 실행합니다
+- 쓰기 전에 Claude에서 Figma 연결(커넥터)을 켜 두세요
 
 `threads-writing`도 참고 파일 세 개를 함께 씁니다.
 
@@ -62,7 +68,14 @@ noshooni-core  →  noshooni-customer-qa  →  고쳐서 배포  →  다시 nos
 
 ### Claude Code
 
-이 저장소를 받아서 `skills` 폴더 안의 원하는 스킬 폴더를 `~/.claude/skills/` 아래로 복사합니다.
+가장 쉬운 방법은 플러그인으로 한 번에 설치하는 것입니다. Claude Code에서 아래 두 줄을 차례로 입력합니다.
+
+```
+/plugin marketplace add oshooni/shooni_ai
+/plugin install noshooni-content@shooni-ai
+```
+
+스킬을 골라서 넣고 싶으면 이 저장소를 받아서 `skills` 폴더 안의 원하는 스킬 폴더를 `~/.claude/skills/` 아래로 복사합니다.
 
 ```bash
 git clone https://github.com/oshooni/shooni_ai.git
@@ -85,6 +98,9 @@ cp -r shooni_ai/skills/* ~/.claude/skills/
 │   └── assets/
 │       ├── Code.gs
 │       └── supabase-trigger.sql
+├── noshooni-card-news/
+│   ├── SKILL.md
+│   └── scripts/build.js
 ├── noshooni-core/
 │   ├── SKILL.md
 │   └── references/
@@ -111,7 +127,9 @@ cp -r shooni_ai/skills/* ~/.claude/skills/
 
 ### Claude 앱(웹·데스크톱)
 
-스킬 폴더를 zip으로 압축한 뒤 설정의 스킬(Capabilities/Skills) 화면에서 업로드합니다.
+`noshooni-card-news`는 바로 올릴 수 있는 파일을 준비해 뒀습니다. [noshooni-card-news.skill 내려받기](https://github.com/oshooni/shooni_ai/releases/latest/download/noshooni-card-news.skill) → 설정의 스킬 화면에서 업로드하면 됩니다.
+
+다른 스킬은 스킬 폴더를 zip으로 압축한 뒤 설정의 스킬(Capabilities/Skills) 화면에서 업로드합니다.
 
 ```bash
 cd shooni_ai/skills
@@ -139,6 +157,10 @@ zip -r threads-writing.zip threads-writing
 
 ```
 수퍼베이스 applications 테이블에 신청이 들어오면 신청자한테 확인 메일 자동으로 보내고 싶어. 무료로.
+```
+
+```
+이번 주 AI 뉴스로 카드뉴스 만들어줘.
 ```
 
 ```
